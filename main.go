@@ -46,44 +46,4 @@ func main() {
 
 	test_setup()
 
-	return
-
-	var raConfig *C.RaConfig
-
-	raConfig = C.rav1e_config_default()
-
-	SetConfigValue(raConfig, "width", width)
-	SetConfigValue(raConfig, "height", height)
-	SetConfigValue(raConfig, "speed", speed)
-
-	var ret C.int
-	ret = C.rav1e_config_set_color_description(raConfig, 2, 2, 2)
-	if ret < 0 {
-		fmt.Printf("rav1e_config_set_color_description error : %v %T\n", ret, ret)
-	}
-
-	var raContext *C.RaContext
-
-	// create a context
-	raContext = C.rav1e_context_new(raConfig)
-
-	// create a frame
-	var raFrame *C.RaFrame
-	fmt.Printf("HELLO1\n")
-	raFrame = C.rav1e_frame_new(raContext)
-	_ = raFrame
-	fmt.Printf("HELLO1\n")
-
-	pixels := make([]uint8, width*height)
-	// not the best
-	for i := range pixels {
-		pixels[i] = 42
-	}
-
-	stride := 4
-	_ = stride
-	l := len(pixels)
-	_ = l
-	//	C.rav1e_frame_fill_plane(raFrame, 0, (*C.uchar)(&pixels[0]), (C.ulong)(l), (C.long)(stride), 1)
-
 }
