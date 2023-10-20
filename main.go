@@ -39,10 +39,14 @@ func test_setup() {
 
 	ret = C.t_rav1e_context_and_frame(racfg)
 	fmt.Printf("t_rav1e_context_and_frame returned %v\n", ret)
+
+	ret = C.t_rav1e_send(racfg)
+	fmt.Printf("t_rav1e_send returned %v\n", ret)
 }
 
 func main() {
-	fmt.Printf("hello, world!\n")
+
+	fmt.Printf("starting!\n")
 
 	test_setup()
 
