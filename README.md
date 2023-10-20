@@ -4,7 +4,7 @@ simple go api for rav1e rust av1 encoder/decoder
 # Description
 This started as a simple wrapper to expriment with av1 encoding/decoding from golang.
 I decided to try and wrap the rust rav1e sdk.
-However it seems that directly calling the rav1e C lib created from crate-c seems to break the golang garbage collector.
+However it seems that directly calling the rav1e C lib created from cargo-c seems to break the golang garbage collector.
 I am not sure why but I feel that the work presented here https://words.filippo.io/rustgo/ provides some clue.
 Given that I was in a bit of a ruch I tried using a simple C trampoline code to call the api which does appear to work.
 
@@ -16,7 +16,7 @@ It does however show the general direction in order to get started.
 # Building
 First get the rav1e repo and follow the build instructions.
 If like me you were working with a slightly older centos version then building nasm is a pain and if you contact me I will try to help you through that part.
-Build the crate-c api as documented and install the headers and shared lib in /usr/local/include and /usr/local/lib respectively
+Build the cargo-c api as documented and install the headers and shared lib in /usr/local/include and /usr/local/lib respectively
 
 Build the trampline code first
 
