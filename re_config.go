@@ -1,4 +1,4 @@
-package main
+package gorav1e
 
 // #cgo CFLAGS: -I/usr/local/include/rav1e
 //#include "rav1e.h"
@@ -7,14 +7,14 @@ import "C"
 import "unsafe"
 
 type RaChromaticityPoint struct {
-	x uint16
-	y uint16
+	X uint16
+	Y uint16
 }
 
 func (pt RaChromaticityPoint) ToC() C.RaChromaticityPoint {
 	var cpt C.RaChromaticityPoint
-	cpt.x = (C.ushort)(pt.x)
-	cpt.y = (C.ushort)(pt.y)
+	cpt.x = (C.ushort)(pt.X)
+	cpt.y = (C.ushort)(pt.Y)
 	return cpt
 }
 

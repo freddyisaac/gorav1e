@@ -1,4 +1,4 @@
-package main
+package gorav1e
 
 // #cgo CFLAGS: -I/usr/local/include
 //#include "rav1e.h"
