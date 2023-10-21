@@ -90,6 +90,40 @@ func (rac *RaConfig) SetMasteringDisplay(pts []RaChromaticityPoint, wp RaChromat
 	return (int)(cret)
 }
 
+func (rac *RaConfig) SetEmitData(emit int) {
+	C.rav1e_config_set_emit_data(rac.cfg, (C.int)(emit))
+}
+
+type RaRational struct {
+	num uint64 // numerator
+	den uint64 // denominator
+}
+
+func (rar RaRational) ToC() C.RaRational {
+	var crar C.RaRational
+	crar.num = (C.ulong)(rar.num)
+	crar.den = (C.ulong)(rar.den)
+	return crar
+}
+
+func (rac *RaConfig) SetSampleAspectRatio(sar RaRational) {
+	C.rav1e_config_set_sample_aspect_ratio(rac.cfg, sar.ToC())
+}
+
+func (rac *RaConfig) SetTimeBase(tb RaRational) {
+	C.rav1e_config_set_time_base(rac.cfg, tb.ToC())
+}
+
+func (rac *RaConfig) SetPixelFormat(depth uint8, subSampling C.RaChromaSampling, chromaPos C.RaChromaSamplePosition, pixelRange C.RaPixelRange) int {
+	cret := C.rav1e_config_set_pixel_format(rac.cfg, (C.uchar)(depth), subSampling, chromaPos, pixelRange)
+	return (int)(cret)
+}
+
+func (rac *RaConfig) SetContentLight(maxContentLightLevel uint16, maxFrameAvgLightLevel uint16) int {
+	cret := C.rav1e_config_set_content_light(rac.cfg, (C.ushort)(maxContentLightLevel), (C.ushort)(maxFrameAvgLightLevel))
+	return (int)(cret)
+}
+
 func (rac *RaConfig) NewContext() *RaContext {
 	return &RaContext{
 		ctx: C.rav1e_context_new(rac.cfg),
